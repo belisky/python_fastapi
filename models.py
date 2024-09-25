@@ -12,15 +12,32 @@ class Role(str,Enum):
     student="student"
     trainer="trainer"
 
-class Course(str,Enum):
+class Courses(str,Enum):
     sa="solutions architect"
     cp="cloud practitioner"
 
-class User(BaseModel):
-    id: Optional[UUID]=uuid4
+class Certificates(str,Enum):
+    sa="solutions architect associate"
+    cp="cloud practitioner certified"
+    sap="solutions architect professional"
+
+
+class Student(BaseModel):
+    id: Optional[UUID]=uuid4()
     first_name: str
     last_name: str
     middle_name=Optional[str]
     gender=Gender
     role=Role
-    course=Course
+    course=Courses[str]
+    trainer=Trainer
+
+class Trainer(BaseModel):
+    id: Optional[UUID]=uuid4()
+    first_name: str
+    last_name: str
+    middle_name=Optional[str]
+    gender=Gender
+    role=Role
+    certificates=Certificates
+    student=Student
