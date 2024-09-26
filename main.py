@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import List
-from models import User
+from models import Student,Trainer
 from uuid import uuid4
 
 app= FastAPI()
@@ -19,6 +19,8 @@ app= FastAPI()
 #     )
 
 # ]
+
+
 @app.get('/')
 async def root():
     return {"message": "Hello Nobel"}
