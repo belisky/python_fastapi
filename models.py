@@ -46,19 +46,6 @@ class Database:
 
 
 
-class Student:
-    
-    def __init__(self, first_name,last_name,middle_name,email,gender,cohort,course,trainer_id):
-        self.first_name=first_name
-        self.last_name=last_name
-        self.middle_name=middle_name
-        self.email=email
-        self.gender=gender
-        self.cohort=cohort
-        self.role=Role.student
-        self.course=course
-        self.trainer_id=trainer_id
-
 
 
     @staticmethod
@@ -152,18 +139,7 @@ class Student:
         cursor.close()
         conn.close()
 
-class Trainer:
-    
-    def __init__(self, first_name,last_name,middle_name,email,gender,cohort,course,trainer_id):
-        self.first_name=first_name
-        self.last_name=last_name
-        self.middle_name=middle_name
-        self.email=email
-        self.gender=gender
-        self.cohort=cohort
-        self.role=Role.trainer
-        self.course=course
-         
+
 
 
 

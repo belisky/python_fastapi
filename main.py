@@ -1,26 +1,18 @@
+import uvicorn
 from fastapi import FastAPI
-from typing import List
-from models import Student,Trainer
-from uuid import uuid4
+from contextlib import asynccontextmanager
 
-app= FastAPI()
+from src.commons.postgres import database
 
 
-# db: List[User] = [
-#     User(
-#         id=uuid4(),
-#          first_name="Nobel"
-#          last_name="Fiawornu"
-#          gender=Gender.male,
-         
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+  await database.connect()
+  yield
+  await database.disconnect()
 
+ 
+app = FastAPI(lifespan=lifespan)
 
-
-#     )
-
-# ]
-
-
-@app.get('/')
-async def root():
-    return {"message": "Hello Nobel"}
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0")
