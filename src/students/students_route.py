@@ -16,3 +16,7 @@ async def get_student_by_email(email: str):
 @students_router.post("/")
 async def insert_student(student: Student):
     return await students_model.insert_student(student)
+
+@students_router.post("/bulk")
+async def bulk_insert_students(students: List[Student]):
+    return await students_model.bulk_insert_students(students)
