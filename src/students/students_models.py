@@ -11,4 +11,9 @@ async def get_student_by_email(email: str) -> Optional[Student]:
             return student
         return None
 
- 
+async def get_all_students(limit: int, offset: int) -> List[Student]:
+    query = "SELECT name, email FROM students LIMIT $1 OFFSET $2"
+    async with database.pool.acquire() as connection:
+        rows = await connection.fetch(query, limit, offset)
+        students = [Student(name=record["name"], email=record["email"]) for record in rows]
+        return students
