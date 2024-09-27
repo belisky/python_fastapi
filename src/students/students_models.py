@@ -19,6 +19,12 @@ async def get_all_students(limit: int, offset: int) -> List[Student]:
         return students
     
 async def insert_student(student: Student):
-    query = "INSERT INTO students (name, email) VALUES ($1, $2)"
+    query = "INSERT INTO students (first_name,last_name, email) VALUES ($1, $2)"
     async with database.pool.acquire() as connection:
         await connection.execute(query, student.first_name, student.last_name,student.email)
+
+async def bulk_insert_students(students: List[Student]):
+    query = "INSERT INTO students (first_name,last_name, email) VALUES ($1, $2)"
+    user_tuples = [(student.first_name,student.last_name, student.email) for student in students]
+    async with database.pool.acquire() as connection:
+        await connection.executemany(query, user_tuples)
