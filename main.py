@@ -3,8 +3,8 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
 from src.commons.postgres import database
-from src.students.students_route import students_router
-from src.trainers.trainers_route import trainers_router
+from src.students.students_router import students_router
+from src.trainers.trainers_router import trainers_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
