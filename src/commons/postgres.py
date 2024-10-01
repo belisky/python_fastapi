@@ -1,8 +1,12 @@
 import asyncpg
 import asyncio
+import os
 
+from dotenv import load_dotenv
 
-DATABASE_URL = "postgresql://postgres@localhost/postgres"
+load_dotenv()
+DATABASE_URL = os.getenv('DATABASE_CONNECTION')
+# print(DATABASE_URL)
 
 class Postgres:
     def __init__(self, database_url: str):
