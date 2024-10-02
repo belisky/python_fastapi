@@ -19,9 +19,12 @@ async def get_all_students(limit: int, offset: int) -> List[Student]:
         return students
     
 async def insert_student(student: Student):
-    query = "INSERT INTO students (first_name,last_name,middle_name,email,gender,cohort,role,course,trainer_id) VALUES ($1, $2 ,$3,$4,$5,$6,$7,$8,$9)"
+    query = "INSERT INTO students (first_name,last_name,middle_name,email,gender,cohort,role,course,trainer_id) VALUES ($1, $2 ,$3, $4, $5, $6, $7, $8, $9)"
     async with database.pool.acquire() as connection:
         await connection.execute(query, student.first_name, student.last_name,student.middle_name,student.email,student.gender,student.cohort,student.role,student.course,student.trainer_id)
+        # inserted_id= await connection.fetchone()[0]
+        
+    return {"Message":"Student created."}
 
 async def bulk_insert_students(students: List[Student]):
     query = "INSERT INTO students (first_name,last_name, email) VALUES ($1, $2)"
